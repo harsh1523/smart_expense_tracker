@@ -4,6 +4,11 @@ from rest_framework import status
 from .serializers import RegisterSerializer
 
 
+@api_view(['GET'])
+def health_check(request):
+    return Response({"status": "Backend running"})
+
+
 @api_view(['POST'])
 def register_user(request):
 
@@ -12,7 +17,7 @@ def register_user(request):
     if serializer.is_valid():
         serializer.save()
         return Response(
-            {"message": "User created successfully"},
+            {"message": "User created"},
             status=status.HTTP_201_CREATED
         )
 
