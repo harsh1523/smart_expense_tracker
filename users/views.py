@@ -8,7 +8,11 @@ from .serializers import RegisterSerializer
 def health_check(request):
     return Response({"status": "Backend running"})
 
-
+@api_view(['POST'])
+def debug_request(request):
+    print(request.data)
+    return Response({"received": request.data})
+    path('debug/', debug_request),
 @api_view(['POST'])
 def register_user(request):
 

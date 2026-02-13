@@ -40,7 +40,8 @@ INSTALLED_APPS = [
 
     'users',
     'rest_framework',
-    'rest_framework.authtoken'
+    'rest_framework.authtoken',
+    'expenses',
 ]
 
 MIDDLEWARE = [
@@ -93,6 +94,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'OPTIONS': {'min_length': 8}
     },
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
@@ -124,12 +126,13 @@ AUTH_USER_MODEL = 'users.User'
 from datetime import timedelta
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES' : (
-        'rest_framework_simplewt.uthentication.JWTAuthentication',
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
 }
 
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME" : timedelta(minutes=60),
-    "AUTH_HEADER_TYPES" : ("Bearer"),
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
+    "AUTH_HEADER_TYPES": ("Bearer",),
+    "USER_ID_FIELD": "email",
 }
